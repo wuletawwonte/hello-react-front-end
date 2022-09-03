@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
 
 const initialState = {
   loading: false,
-  greeting: [],
+  greeting: {},
   error: '',
 };
 
-export const fetchGreeting = createAsyncThunk('greeting/fetchGreeting', () => fetch('http://localhost:3001/api/v1/greetings')
-  .then((response) => response.json())
-  .then((data) => data));
+export const fetchGreeting = createAsyncThunk('greeting/fetchGreeting', () => axios
+  .get('http://localhost:3001/api/v1/greetings')
+  .then((response) => response.data));
 
 export const greetingSlice = createSlice({
   name: 'greeting',
@@ -27,7 +29,7 @@ export const greetingSlice = createSlice({
     builder.addCase(fetchGreeting.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
-      state.greeting = [];
+      state.greeting = {};
     });
   },
 });

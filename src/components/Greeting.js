@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGreeting } from '../redux/greetingSlice';
+import { fetchGreeting } from '../redux/greeting';
 
 const Greeting = () => {
 	const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Greeting = () => {
 
 	return (
 		<React.Fragment>
-			<h1>{greeting.greeting}</h1>
+			<h1>{greeting.message}</h1>
 			<button onClick={handleClick}>
 				{loading ? 'Loading...' : 'Fetch Greeting'}
 			</button>
